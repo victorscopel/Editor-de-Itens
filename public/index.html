@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Editor de Itens - Chase Fantasy</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.65.16/codemirror.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.65.16/theme/dracula.min.css">
+    <link rel="stylesheet" href="style.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.65.16/codemirror.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.65.16/mode/javascript/javascript.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.65.16/mode/xml/xml.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.65.16/mode/css/css.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.65.16/mode/htmlmixed/htmlmixed.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/js-beautify/1.14.11/beautify.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/js-beautify/1.14.11/beautify-html.min.js"></script>
+</head>
+<body>
+    <div class="tab-nav">
+        <button class="tab-link active" data-tab="tab-itens">Itens</button>
+        <button class="tab-link" data-tab="tab-pacotes">Pacotes</button>
+        <button class="tab-link" data-tab="tab-missoes">Missões</button>
+        <button class="tab-link" data-tab="tab-traducoes">Traduções</button> </div>
+
+    <div id="tab-itens" class="container tab-content active">
+        <div class="sidebar">
+            <div class="actions">
+                <button id="save-all-button" title="Salva todas as mudanças no arquivo itens.js">💾 Salvar Itens</button>
+                <button id="add-new-item-button">➕ Novo Item</button>
+            </div>
+            <input type="text" id="search-bar" class="search-bar" placeholder="Buscar item por ID ou nome...">
+            <div id="item-list" class="item-list"><p>Carregando itens...</p></div>
+        </div>
+        <div class="main-content">
+            <form id="edit-form">
+                <input type="hidden" id="item-index">
+                <div class="form-group"><label for="item-comment">Comentário</label><input type="text" id="item-comment" class="form-control"></div>
+                <div class="form-group"><label for="item-id">ID do Item</label><input type="text" id="item-id" class="form-control"></div>
+                <div class="form-group"><label>HTML do Tooltip</label><div id="html-editor-placeholder"></div></div>
+                <div class="form-group"><label>Objeto de Tradução</label><div id="trad-editor-placeholder"></div></div>
+                <div class="form-group"><label>Objeto do Baú</label><div id="bau-editor-placeholder"></div></div>
+                <div class="form-group"><label>Objeto TPC (Forja)</label><div id="tpc-editor-placeholder"></div></div>
+                <button type="submit" class="save-item-button">Atualizar Item (na memória)</button>
+            </form>
+        </div>
+    </div>
+
+    <div id="tab-pacotes" class="container tab-content">
+        <div class="sidebar">
+            <div class="actions">
+                <button id="save-pacotes-button" title="Salva todas as mudanças no arquivo pacotes.js">💾 Salvar Pacotes</button>
+                <button id="add-new-pacote-button">➕ Novo Pacote</button>
+            </div>
+            <input type="text" id="search-pacotes" class="search-bar" placeholder="Buscar pacote...">
+            <div id="pacotes-list" class="item-list"><p>Carregando pacotes...</p></div>
+        </div>
+        <div class="main-content">
+            <form id="pacotes-form">
+                <input type="hidden" id="pacote-index">
+                <div class="form-group">
+                    <label for="pacote-id">ID do Pacote (Ex: CaixaJack2024)</label>
+                    <input type="text" id="pacote-id" class="form-control">
+                </div>
+                <div class="form-group">
+                    <label>Conteúdo do Pacote (Bloco de Código)</label>
+                    <div id="pacote-content-editor"></div>
+                </div>
+                <button type="submit" class="save-item-button">Atualizar Pacote (na memória)</button>
+            </form>
+        </div>
+    </div>
+
+    <div id="tab-missoes" class="container tab-content">
+        <div class="sidebar">
+            <div class="actions">
+                <button id="save-missoes-button" title="Salva todas as mudanças no arquivo missoes.js">💾 Salvar Missões</button>
+                <button id="add-new-missao-button">➕ Nova Missão</button>
+            </div>
+            <input type="text" id="search-missoes" class="search-bar" placeholder="Buscar missão...">
+            <div id="missoes-list" class="item-list"><p>Carregando missões...</p></div>
+        </div>
+        <div class="main-content">
+            <form id="missoes-form">
+                <input type="hidden" id="missao-index">
+                <div class="form-group">
+                    <label for="missao-id">ID da Missão (Ex: MissaoInicial)</label>
+                    <input type="text" id="missao-id" class="form-control">
+                </div>
+                <div class="form-group">
+                    <label>Conteúdo da Missão (Bloco de Código)</label>
+                    <div id="missao-content-editor"></div>
+                </div>
+                <button type="submit" class="save-item-button">Atualizar Missão (na memória)</button>
+            </form>
+        </div>
+    </div>
+    
+    <div id="tab-traducoes" class="container tab-content">
+        <div class="sidebar">
+            <div class="actions">
+                <button id="save-traducoes-button" title="Salva todas as mudanças no arquivo traducao.js">💾 Salvar Traduções</button>
+                <button id="add-new-traducao-button">➕ Nova Tradução</button>
+            </div>
+            <input type="text" id="search-traducoes" class="search-bar" placeholder="Buscar tradução...">
+            <div id="traducoes-list" class="item-list"><p>Carregando traduções...</p></div>
+        </div>
+        <div class="main-content">
+            <form id="traducoes-form">
+                <input type="hidden" id="traducao-index">
+                <div class="form-group">
+                    <label for="traducao-id">ID da Tradução (Ex: TraducaoGeral)</label>
+                    <input type="text" id="traducao-id" class="form-control">
+                </div>
+                <div class="form-group">
+                    <label>Conteúdo da Tradução (Bloco de Código)</label>
+                    <div id="traducao-content-editor"></div>
+                </div>
+                <button type="submit" class="save-item-button">Atualizar Tradução (na memória)</button>
+            </form>
+        </div>
+    </div>
+
+    <script src="app.js"></script>
+</body>
+</html>

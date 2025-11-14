@@ -1,0 +1,244 @@
+/* Tema True Dark Neon Green */
+:root {
+    --true-dark: #000000;
+    --dark-1: #0a0a0a;
+    --dark-2: #1a1a1a;
+    --dark-3: #222222;
+    --neon-green: #00ff00;
+    --text-color: #d0d0d0;
+    --border-color: #222;
+    --editor-bg: #1e1e1e;
+}
+
+body, html {
+    margin: 0;
+    padding: 0;
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+    background-color: var(--dark-1); 
+    color: var(--text-color);
+    height: 100vh;
+    overflow: hidden;
+    display: flex;
+    flex-direction: column;
+}
+
+/* --- ESTILOS DAS ABAS --- */
+.tab-nav {
+    display: flex;
+    background-color: var(--true-dark);
+    border-bottom: 1px solid var(--border-color);
+    flex-shrink: 0;
+}
+.tab-link {
+    padding: 15px 25px;
+    border: none;
+    background: none;
+    color: var(--text-color);
+    cursor: pointer;
+    font-size: 16px;
+    font-weight: bold;
+    border-bottom: 3px solid transparent;
+}
+.tab-link:hover {
+    background-color: var(--dark-3);
+}
+.tab-link.active {
+    color: var(--neon-green);
+    border-bottom: 3px solid var(--neon-green);
+    text-shadow: 0 0 8px rgba(0, 255, 0, 0.7);
+}
+
+/* --- CONTEÚDO DAS ABAS --- */
+.tab-content {
+    display: none; /* Escondido por padrão */
+    flex-grow: 1;
+    height: calc(100vh - 54px);
+}
+.tab-content.active {
+    display: flex; /* Mostra a aba ativa */
+}
+
+/* --- BARRA DE ROLAGEM --- */
+::-webkit-scrollbar { width: 10px; height: 10px; }
+::-webkit-scrollbar-track { background: var(--dark-2); border-radius: 5px; }
+::-webkit-scrollbar-thumb { background: var(--neon-green); border-radius: 5px; border: 2px solid var(--dark-2); box-shadow: 0 0 10px rgba(0, 255, 0, 0.5); }
+::-webkit-scrollbar-thumb:hover { background: #fff; }
+
+.container {
+    height: 100%;
+}
+.sidebar {
+    width: 350px;
+    flex-shrink: 0;
+    background-color: var(--true-dark); 
+    border-right: 1px solid var(--border-color);
+    display: flex;
+    flex-direction: column;
+    height: 94%;
+}
+.main-content {
+    flex-grow: 1;
+    width: calc(100% - 350px);
+    padding: 20px;
+    overflow-y: auto;
+    height: calc(100% - 100px);
+    background-color: var(--dark-1);
+}
+.actions {
+    padding: 10px;
+    display: flex;
+    gap: 10px;
+    border-bottom: 1px solid var(--border-color);
+}
+.actions button {
+    flex-grow: 1;
+    padding: 10px;
+    border: 1px solid var(--neon-green);
+    border-radius: 5px;
+    cursor: pointer;
+    font-weight: bold;
+    color: var(--neon-green);
+    background-color: var(--dark-3);
+    font-size: 14px;
+    transition: all 0.2s ease;
+    text-shadow: 0 0 8px rgba(0, 255, 0, 0.5);
+}
+.actions button:first-child {
+    background-color: var(--neon-green);
+    color: var(--true-dark);
+}
+.actions button:first-child:hover {
+    background-color: #fff;
+    color: var(--true-dark);
+    text-shadow: none;
+}
+.actions button:hover {
+    background-color: var(--neon-green);
+    color: var(--true-dark);
+}
+.search-bar {
+    width: calc(100% - 20px);
+    padding: 10px;
+    margin: 10px;
+    border: 1px solid var(--border-color);
+    border-radius: 5px;
+    box-sizing: border-box;
+    background-color: var(--dark-2);
+    color: var(--text-color);
+}
+.search-bar:focus {
+    outline: none;
+    border-color: var(--neon-green);
+    box-shadow: 0 0 10px rgba(0, 255, 0, 0.5);
+}
+.item-list {
+    overflow-y: auto;
+    flex-grow: 1;
+}
+.item-list button {
+    display: block;
+    width: 100%;
+    padding: 12px 15px;
+    background: none;
+    border: none;
+    border-bottom: 1px solid var(--border-color);
+    text-align: left;
+    cursor: pointer;
+    font-size: 14px;
+    color: var(--text-color);
+    transition: all 0.1s ease;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+.item-list button:hover {
+    background-color: var(--dark-3);
+    color: var(--neon-green);
+}
+.item-list button.active {
+    background-color: var(--neon-green);
+    color: var(--true-dark);
+}
+.form-group {
+    margin-bottom: 15px;
+}
+.form-group label {
+    display: block;
+    font-weight: bold;
+    margin-bottom: 5px;
+    color: var(--neon-green);
+    text-shadow: 0 0 8px rgba(0, 255, 0, 0.7);
+}
+.form-control {
+    width: 100%;
+    padding: 8px;
+    border: 1px solid var(--border-color);
+    border-radius: 4px;
+    box-sizing: border-box;
+    font-size: 14px;
+    background-color: var(--dark-2);
+    color: var(--text-color);
+}
+.form-control:focus {
+    outline: none;
+    border-color: var(--neon-green);
+}
+
+/* --- ESTILOS PARA TODOS OS EDITORES CODEMIRROR --- */
+.CodeMirror {
+    background-color: var(--editor-bg); 
+    border: 1px solid var(--border-color);
+    border-radius: 4px;
+    height: auto;
+    font-family: "Courier New", Courier, monospace;
+    font-size: 14px;
+    transition: all 0.2s ease;
+}
+.CodeMirror-focused {
+    border-color: var(--neon-green);
+    box-shadow: 0 0 10px rgba(0, 255, 0, 0.5);
+}
+
+/* Tamanhos para editores de ITENS */
+#html-editor-placeholder .CodeMirror { height: 250px; }
+#trad-editor-placeholder .CodeMirror { height: 150px; }
+#bau-editor-placeholder .CodeMirror { height: 80px; }
+#tpc-editor-placeholder .CodeMirror { height: 80px; }
+
+/* Tamanhos para editores de PACOTES, MISSÕES E TRADUÇÕES (NOVO) */
+#pacote-content-editor .CodeMirror,
+#missao-content-editor .CodeMirror,
+#traducao-content-editor .CodeMirror {
+    height: 70vh; /* Ocupa 70% da altura da tela */
+}
+/* --- FIM DOS ESTILOS CODEMIRROR --- */
+
+.save-item-button {
+    background-color: var(--neon-green);
+    color: var(--true-dark);
+    padding: 12px 20px;
+    border: 1px solid var(--neon-green);
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 16px;
+    font-weight: bold;
+    text-shadow: 0 0 5px rgba(0, 255, 0, 0.5);
+    transition: all 0.2s ease;
+}
+.save-item-button:hover {
+    background-color: #fff;
+    color: var(--true-dark);
+    text-shadow: none;
+}
+
+.item-name-comment {
+    color: var(--neon-green);
+    font-style: italic;
+    opacity: 1;
+    padding-left: 15px;
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+    cursor: default;
+}
